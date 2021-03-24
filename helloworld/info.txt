@@ -1,0 +1,2 @@
+npm install - installs all dependencies
+DEBUG=helloworld:* npm start - start
