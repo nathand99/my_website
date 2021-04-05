@@ -10,45 +10,47 @@ html(lang='en')
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-  //- navbar-expand-lg - responsive collapsing (lg = large), navbar-(light/dark): white/black text, bg-primary/dark/light: 
-  nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
-    //- container-fluid - container extends all the way right
-    div(class="container-fluid")
-      //- navbar-brand - use for website name
-      a(class="navbar-brand" href="#") my_website
-      button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-        span(class="navbar-toggler-icon")
-      //- everything in this div collapses into a button when width is resized too small
-      div(class="collapse navbar-collapse" id="navbarSupportedContent")
-        ul(class="navbar-nav me-auto mb-2 mb-lg-0")
-          li(class="nav-item")
-            //- nav-link active and aria-current="page" - current page
-            a(class="nav-link active" aria-current="page" href="#") Home 
-          li(class="nav-item")
-           a(class="nav-link" href="#") Projects
-          li(class="nav-item")
-            a(class="nav-link" href="#") Blog
-          li(class="nav-item")
-            a(class="nav-link" href="#") About
-          li(class="nav-item")
-            a(class="nav-link" href="#") Contact
-          li(class="nav-item dropdown")
-            a(class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false") Dropdown Menu
-            ul(class="dropdown-menu" aria-labelledby="navbarDropdown")
-              li 
-                a(class="dropdown-item" href="#") Action
-              li
-                a(class="dropdown-item" href="#") Another action
-              li
-                a(class="dropdown-divider")
-              li
-                a(class="dropdown-item" href="#") Something else here
-          li(class="nav-item")
-            a(class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true") Disabled
-        //- ml-auto - pushes search bar and button to the right
-        form(class="d-flex ml-auto")
-          input(class="form-control mr-1" type="search" placeholder="Search" aria-label="Search")
-          button(class="btn btn-outline-success" type="submit") Search
+    div(class="pattern") 
+    //- navbar-expand-lg - responsive collapsing (lg = large), navbar-(light/dark): white/black text, bg-primary/dark/light: 
+    nav(class="navbar navbar-expand-lg navbar-dark bg-black")
+      //- container-fluid - container extends all the way right
+      div(class="container-fluid")
+        //- navbar-brand - use for website name
+        a(class="navbar-brand" href="/") my_website
+        button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+          span(class="navbar-toggler-icon")
+        //- everything in this div collapses into a button when width is resized too small
+        div(class="collapse navbar-collapse" id="navbarSupportedContent")
+          ul(class="navbar-nav me-auto mb-2 mb-lg-0")
+            li(class="nav-item")
+              //- nav-link active and aria-current="page" - current page
+              a(class="nav-link", class=(name === "index" ? "active" : undefined) aria-current="page" href="/") Home 
+            li(class="nav-item")
+            a(class="nav-link", class=(name === "projects" ? "active" : undefined), href="/projects") Projects
+            li(class="nav-item")
+              a(class="nav-link", class=(name === "blog" ? "active" : undefined), href="/blog") Blog
+            li(class="nav-item")
+              a(class="nav-link", class=(name === "about" ? "active" : undefined), href="/about") About
+            li(class="nav-item")
+              a(class="nav-link", class=(name === "contact" ? "active" : undefined),  href="/contact") Contact
+            //- everything from here: (dropdown, disabled button, search form are invis - hidden)
+            li(class="nav-item dropdown invis")
+              a(class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false") Dropdown Menu
+              ul(class="dropdown-menu" aria-labelledby="navbarDropdown")
+                li 
+                  a(class="dropdown-item" href="#") Action
+                li
+                  a(class="dropdown-item" href="#") Another action
+                li
+                  a(class="dropdown-divider")
+                li
+                  a(class="dropdown-item" href="#") Something else here
+            li(class="nav-item invis")
+              a(class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true") Disabled
+          //- ml-auto - pushes search bar and button to the right
+          form(class="d-flex ml-auto invis")
+            input(class="form-control mr-1" type="search" placeholder="Search" aria-label="Search")
+            button(class="btn btn-outline-success" type="submit") Search
 
-  div(class='col-sm-10')
-    block content
+    div(class='col-sm-10 content')
+      block content

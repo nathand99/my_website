@@ -2,12 +2,26 @@ extends layout
 
 block content
 
-  h1= title
-  p Welcome to #{title}
+  h1 Hi, I'm Nathan
+  br
+  h5 Welcome to #{title}. Here you can find stuff about me
+  br
+  h5 Check out:
+  ul 
+    li 
+      a(href="/projects") Projects 
+      placeholder for my projects
+    li 
+      a(href="/blogs") Blogs 
+      placeholder for some blogs that I write
 
-  h1 Dynamic content
 
-  if error
-    p Error getting dynamic content.
-  else
-    p The library has the following record counts:
+
+
+
+  //- h1 Dynamic content
+
+  //- if error
+  //-   p Error getting dynamic content.
+  //- else
+  //-   p The library has the following record counts:

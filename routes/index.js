@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'My Website' });
+  res.render('index', { name: "index", title: 'my_website' });
   // could do:
   // res.json() - send json
   // res.sendFile()
