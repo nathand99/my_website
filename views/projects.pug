@@ -3,11 +3,16 @@ extends layout
 block content
 
   h1 #{title}
-  H3 Welcome to #{title}
+  H4 Welcome to my #{title}
 
-  h1 Dynamic content
+  div(class="container projects")
+    a(href="/projects/my_website")
+      div(class="project")
+        h3 my_website 
+        p my_website is my personal website. It is created using Express.js, a Node.js web application framework. Each view is written in Pug using CSS. Pug is a template engine used to generate html 
+    a(href="/" disabled="disabled")
+      div(class="project")
+        h5 my_website 
+        p this is description of this 
 
-  if error
-    p Error getting dynamic content.
-  else
-    p The library has the following record counts:
+  

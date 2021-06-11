@@ -1,0 +1,75 @@
+extends layout
+
+block content
+
+    h1 #{title}
+    //-H5 Project type: personal
+    a(href="https://github.com/nathand99/my_website" target="_blank" rel="noopener noreferrer") GitHub Repo
+    br
+    br
+    //- important: this path is how you get images. Put images in public/images folder
+    img(src="/images/web.png" alt="my_website image" width="700" height="500" class="center")
+    br
+    br
+    h5 Description
+    h5
+    p my_website is my personal website. It is created using Express.js, a Node.js web application framework. Each view is written in Pug using CSS. Pug is a template engine used to generate html.
+    br
+    h5 Motivation
+    p I was inspired to create this project by my friend Solomon and his #[a(href="http://n4p.club/" target="_blank" rel="noopener noreferrer") website]. 
+    p Some reasons I created this website were: 
+    ul 
+        li Practice/improve/refresh my front end coding. I mainly created this website to refresh on things I have learnt while creating other front end projects (usually uni projects).
+        li Have my own website floating around on the internet. On this website I can show and store some information on some projects/things I've done as well as other things (eg blogs or mayby something else)
+        li Learn express.js. I have used Node.js before but not express.js 
+        li Learn about hosting. More on that later...
+    br
+    h5 Structure 
+    p As of version 1, this website contains 4 main pages:
+    ul 
+        li Home - Landing page that has a little bit about me and some links to other pages
+        li Projects - A page that contains links to my projects.
+        li Blogs - A place that has some blogs. Not sure how regularly this will be updated....I wouldn't sweat on my next blog.
+        li Contact - A collection of my links.
+    br
+    h5 Development
+    p I started the project on March 24 2021. Although this project took a long time from start to finish, I only spent 5 days on it (I am writing this on day 5). In those days I probably spent around 2-3 hours. Obviously I wanted to finish this as fast as possible, but a very busy term 1 got in the way. 
+    p The first couple of days I was getting used to express.js by reading some materials and experimenting with it. I mainly used #[a(href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs" target="_blank" rel="noopener noreferrer") this guide] to learn express.js. The guide recommends Pug which I hadn't used before to create views (pages that are rendered) but did end up using. Pug is very simlilar to HTML. The following div tag from HTML: 
+    pre &lt;div class=my_class&gt;CONTENT_HERE&lt;/div&gt;
+    p would be written as:
+    pre div(class=my_class) CONTENT HERE
+    p Note that a closing tag is not needed. Another important note is that nesting in Pug is done by using tabs unlike HTML. You can also just write plain HTML while using Pug if you wanted.
+    p After experimenting around, the job was to create routes and views. A view called layout.pug contains the navbar which all other views inherit. Every page (such as this one) is a separate Pug file.
+    br
+    h5 Hosting 
+    p The problem of hosting brought this project to a grinding halt. I originally planned to use a rasberry pi as a web server using apache but this had some problems: 
+    ul 
+        li I was unsure of the legality of hosting a web server on your Telstra home internet connection
+        li Also I was wary of the security risks of running a web server on my home internet 
+        li Cost - A rasberry pi is ~$100 so if the above 2 points caused problems I would be $100 poorer and still with no website.
+    p As a result, I turned to web hosting. The main problem with hosting was that the hosting sites didn't work well with express.js since a server is needed. Firstly, I tried Google Cloud, which did not work. Then I tried AWS which was a nightmare. I tried Netlify which is a great website, but doesn't host express.js without modifications. Lastly, my friends #[a(href="https://www.heroku.com/" target="_blank" rel="noopener noreferrer") Heroku]. It took about 30 seconds to get hosted at: #[a(href="https://ndriscoll.herokuapp.com/" target="_blank" rel="noopener noreferrer") https://ndriscoll.herokuapp.com/] for free! I Highly recommend heroku for hosting.
+    br
+    h5 As of version 1:
+    ul 
+        li There is one project - this one 
+        li There will hopefully be one blog 
+    p As you can see this is a barebones starting point but the idea is to get something online. As a result, things I planned for the release of the website are pushed back to version 2.
+    br
+    h5 Features to be completed for version 2:
+    ul 
+        li I will have most of my projects (personal and uni)
+        li I will have more blogs 
+        li A contact form in the contact page
+        li A prettier projects and blogs page to better display projects + blog
+        li A more useful home page 
+        li UI improvements - eg more GitHub logos!
+        li Database integration: Currently individual projects and blogs are just another Pug template that I need to route manually. I will look into storing all this information on database.
+        li I am also hoping to host some of the projects I have completed on this website somewhere 
+        li Maybe something interesting such as a functionality of some sort on the website...details very light
+        ul
+            li Maybe a game?
+            li Please send any thoughts to me
+
+    
+
+
