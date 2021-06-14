@@ -13,4 +13,9 @@ router.get('/about', function (req, res) {
   res.send('About this wiki');
 })
 
+// Home page route.
+router.get('/html_cheatsheet', function (req, res) {
+    res.render('html_cheatsheet.pug', { name: "blog", title: 'html_cheatsheet' });
+})
+
 module.exports = router;

@@ -52,6 +52,16 @@ pre {
   border-width:thin;
   padding: 10px;
 }
+
+code {
+  color:aquamarine;
+  border-color: white;
+  border-style: solid;
+  /*border-radius: 1px;*/
+  border-width:thin;
+  padding: 6px;
+  background-color:rgb(46, 46, 53);
+}
 .sidebar-nav {
   margin-top: 20px;
   padding: 0;
