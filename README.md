@@ -21,3 +21,9 @@ my_website is my personal website. It is created using Express.js, a Node.js web
 
 
 **Added Youtube channel to contact page**
+
+TODO for 1.2
+- Increase readability for desktop + mobile (especially for images)
+- More projects
+- More blogs
+- Improve styling (especially for blogs and projects pages)
