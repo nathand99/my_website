@@ -1,0 +1,86 @@
+extends layout
+
+block content
+
+    h1(class="title") #{title}
+    //-H5 Project type: personal
+    //- important: this path is how you get images. Put images in public/images folder
+    p 15 March 2020
+    br
+
+    <p><u>A brief history on modern encryption</u></p>
+
+    <p>Modern encrpytion uses a key to jumble a message into nonsense and then also decrypts the nonsense back into the original message. To break the encryption the attacker would need to break the key through a brute force attack. The number of bits of the key determines how many guesses an attacker must make. Eg a 32-bit key would require 2^32 guesses (2^31&nbsp;on average).</p>
+
+    <p><u>Data Encryption Standard</u></p>
+
+    <p>In 1975 the American&nbsp;National Bureau of Standards (now NIST), had a competition for a new standard in encryption to be used to secure&nbsp;government data. The winning proposal was Data Encryption Standard (DES) developed by IBM (and slightly improved by the NSA).&nbsp;</p>
+
+    <p>How does it work?</p>
+
+    <p>DES is a block cipher - it takes in plaintext of a&nbsp;fixed length of 64 bits and transforms it into ciphertext using a key (64-bit - but 8 bits are parity bits, only 56 are used for encryption). The key is a symmetric key (a shared secret): the same key&nbsp;is used to encrypt and decrypt.&nbsp;</p>
+
+    p
+        figure
+            img(src="/images/des.PNG" alt="des" class="center smallpic")
+            figcaption(style="text-align: center") Figure 1 - DES 
+                a(href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/DES-main-network.png/250px-DES-main-network.png" target="_blank" rel="noopener noreferrer") (image source)
+
+    br
+    <p>As shown in the diagram, the plaintext goes through 16 &quot;rounds&quot; of processing. Before the rounds, the plaintext is broken from 1 64-bit block into 2 32-bit blocks and they are processed alternatively - this is called the Fiestal Scheme. The F function jumbles one 32-bit block and then the resulting jumbled plaintext is XOR&#39;ed with the other 32-bit block. The blocks then swap (the block which didn&#39;t go through the function goees through the&nbsp;next time). Decryption is exactly the same process but the processes is reversed, this makes it simple to implement.</p>
+
+    <p>The problem with DES is that the key is too short at 56-bits. The key&nbsp;can easily be brute forced and if that happens, all messages encrypted with that key can be decrypted and read as plaintext. As a result many DES variants were created such as: RC5, NewDES (different structure to DES) and FEAL. An improvement to DES to make it more secure is Triple DES - DES encryption algorithm applied three times or 3 different keys used. Triple DES is more secure than non-triple DES and is still used to today in some applications such as electronic payment systems.</p>
+
+    <p>By 2001, normal DES was aging and thought to be insecure so NIST held another competition to find a new encryption standard. It chose &quot;Rijndael&quot; to be &quot;Advanced Encryption Standard&quot; with approval by the NSA.</p>
+
+    <p>AES is a symmetric key, block cipher just like DES. It hasa block size of 128 bits and 3 different key lengths: 128, 192 and 256 bit keys. AES uses a 4x4 array of 16 bytes.&nbsp;</p>
+
+    p
+        figure
+            img(src="/images/aes1.png" alt="aesarray" class="center smallpic")
+            figcaption(style="text-align: center") Figure 2 - AES uses a 4x4 array
+
+    <p>The key size determines how many encryption rounds are performed: 128-bit: 10 rounds, 19-bit: 12 rounds, 256-bit: 14 rounds.&nbsp;</p>
+
+    <p><u>Algorithm:</u></p>
+
+    <ol>
+        <li>KeyExpansion -&nbsp;<span>AES requires a separate 128-bit round key block for each round plus one more. A</span>&nbsp;key schudule expands the&nbsp;<span>original starting key (128, 192 or 256 bit)</span> into keys for each round&nbsp;using&nbsp;Rijndael&#39;s key schedule</li>
+        <li>Initial round key addition
+        <ol>
+            <li>AddRoundKey&nbsp;- each byte of the state is XOR&#39;ed with a byte of the round key</li>
+        </ol>
+        </li>
+        <li>9, 11 or 13 rounds (depends on size of key as stated above):
+        <ol>
+            <li>SubBytes - a non-linear&nbsp;substitution step where each byte is replaced with another according to a lookup-table</li>
+            <li>ShiftRows - a transposition step where the last three rows of the state are shifted cyclically a certain number of steps.</li>
+            <li>MixColumns - a linear mixing operation which operates on the columns of the state, combining the four bytes in each column.</li>
+            <li>AddRoundKey (from step 2)</li>
+        </ol>
+        </li>
+        <li>Final round:
+        <ol>
+            <li>SubBytes</li>
+            <li>ShiftRows</li>
+            <li>AddRoundKey</li>
+        </ol>
+        </li>
+    </ol>
+
+    <p>See diagrams below for a visual representation of the steps:</p>
+
+    p
+        figure
+            img(src="/images/aes2.png" alt="aesarray" class="center smallpic")
+            figcaption(style="text-align: center") Figure 3 - AES algorithm (image source 
+                a(href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/AES-AddRoundKey.svg/320px-AES-AddRoundKey.svg.png" target="_blank" rel="noopener noreferrer") 1
+                span , 
+                a(href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/AES-ShiftRows.svg/320px-AES-ShiftRows.svg.png" target="_blank" rel="noopener noreferrer") 2
+                span , 
+                a(href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/AES-MixColumns.svg/320px-AES-MixColumns.svg.png" target="_blank" rel="noopener noreferrer") 3
+                span )
+
+    <p>AES is the current standard for encryption and is used for classified and unclassified US government information (with top secret information needing to be encrypted with 192 or 256 bit keys). Researchers (and the NSA) have tried to break AES since its inception to no (confirmed) success. With no knowledge of the key used, an attacker cannot access information encryped by AES. The key cannot be brute forced as easily as DES because the key is significantly longer (56 bits to 128-256 bits. A minimum of 2^128 combinations will need to be performed which with current technology is infeasible).</p>
+
+    <p>&nbsp;</p>

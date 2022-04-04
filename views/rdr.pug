@@ -1,0 +1,78 @@
+extends layout
+
+block content
+
+    h1 #{title}
+    //-H5 Project type: personal
+    //- important: this path is how you get images. Put images in public/images folder
+    br
+    h3 Introduction
+    p For my undergraduate thesis in 2021, I created a command line system which uses Ripple Down Rules for Explainable AI. This page provides a summary of the work completed during the thesis and projects results.
+    p The source code of this project is available on 
+        a(href="https://github.com/nathand99/rdr_python" target="_blank" rel="noopener noreferrer") GitHub
+        span . Please feel free to view and use the source code in the repository in the file rdr.py. Instructions for setup and use are included in the readme as well as a full walkthrough.
+    p This page only summarises some aspects of the project with light detail and omits large parts of the project. To see the full story please read the 
+        a(href="/images/finalthesisreportnathandriscoll.pdf" target="_blank" rel="noopener noreferrer") full final thesis report
+        span  or the slides for my 
+        a(href="/images/thesisCpres.pdf" target="_blank" rel="noopener noreferrer") final presentation
+        span .
+    p I'd like to thank my supervisor Dr. Mike Bain and my assessor Prof. Paul Compton for their guidance and feedback on the project throughout the year.
+    br
+    h3 Background
+    p Firstly what is explaianble AI and what are ripple down rules?
+    h5 Explaianble AI
+    p Explainable AI attempts to explain how a machine learned model reached its conclusion in a form that can be understood by humans. The need for explainable AI arises from “black box” machine learned models. These “black boxes” are accurate but as a result, are often far too complex to be understood by humans. This means that we do not know the reasons behind a ML model's decision. 
+    p This is a problem because for some applications, the predictions of these “black box” algorithms must be explainable on demand for legal reasons - an example being algorithms that approve or deny lending at financial institutions. But, because the ML model is too complex to be understood by a human, a human usually cannot explain its decisions.
+    p Explainable AI is also relevant if there is no legal requirement for explainability - for example, explainable AI improves the trust of “black box” algorithms by letting developers and users understand how its conclusions are reached.
+    p Explainable AI attempts to solve this problem. An explainable AI system creates an interpretable model which explains a ML model. This allows a complex model to be understood by humans. 
+
+    h5 Ripple Down Rules
+    p Ripple down rules (or RDR for short) is a knowledge acquisition system which involves incrementally building up the knowledge in the system by adding rules. Every time the system does not deal with a case correctly - a new rule is added to correctly deal with that case. This allows the knowledge to be built up while it is in use. There are multiple types of RDR. The type of RDR that is used in this project is Single Classification RDR - which means each rule has one conclusion
+    br
+    h3 Project Specification
+    p The aim of this project was to create a system where an explainability model can be built using RDR to explain the predictions of a "black box" classifier. Using RDR for Explainable AI has not been done before - so this project attempted to prove that RDR can indeed be used for Explainable AI.
+    p The explainability model was to be built with RDR by using an expert human-in-the-loop. Rules created by the human expert form explainability model.
+    p But how does this work? The following figure is the system architecture diagram 
+    
+    figure
+        img(src="/images/system.png" alt="system architecture" class="center")
+        figcaption(style="text-align: center") Figure 1 - system architecture diagram
+
+    ul
+        li For each case, the case is be run through the “black box” classifier which gives its classification. 
+        li Next, the case is shown to the expert human-in-the-loop. The classification of the case by the “black box” model is seen by the expert and the case is run through the RDR explainability model. 
+        li If the RDR system's prediction for the case matches the “black box” prediction, no action is taken, as the RDR has made a correct classification - move onto the next case. 
+        li However, if the RDR system's classification does not match, the expert user creates a new rule to correctly classify it by selecting relevant attributes. 
+    p The expert human will only define a rule for a classification in terms of combinations of attributes that make sense to them. It follows that a knowledge-base constructed in this way will be an explainable model of the predictions of the black-box model on the test set of cases.
+
+    label The method to achieve this architecture is as follows:
+    ul  
+        li Proof of concept: create RDR system from scratch using python 
+        li Creating a pseudo “black box” classifier (decsion tree)
+        li Creating the overall system by combining the RDR system and "black box" classifier
+        li Using an actual “black box” classifier (SVM, XGBoost) and different datasets
+    p Additionally a significant portion of the project was devoted to giving hints to the expert. Sometimes it is not clear what attributes to make rules on for the human expert. The system gives the expert human hints about what attributes are important according to various ML algorithms run on the dataset.
+    br
+    h3 Motivation
+    p There were several motivations behind using RDR for Explainable AI:
+    ol 
+        li RDR captures an expert humans understanding through incremental construction of explainability model. Expert's knowledge is tied to a particular case with each created rule allowing for straightforward knowledge base creation
+        li Additionally, using a human in the loop to create the explainability model differentiates RDR from other algorithmic methods of Explaianble AI because rules made by humans can naturally be understood by a human - as opposed to explaianble AI created by a computer.
+        li A simple print out of the rules forms the explainable model
+        li It is a “no code” way of building Explainable AI. Allows programmers and importantly non-programmers (experts in other fields are usually non-programmers) to create the rules
+
+    br
+    h3 Development
+    p The system was creating in python and utilises several python libraries. Design decisions were not clear at the beginning of the project and this made development quite difficult. Design decisions and a brief justification is outlined as follows: 
+    ul 
+        li Programming language: Python - Python is a simple programming language and is easy to use. It also has many libraries and frameworks that can be imported to assist with tasks required for project such as like data analysis and machine learning
+        li Data manipulation: Pandas - Pandas provides stores data in easy to use dataframes. A dataframe is simply a table of rows and columns that can be manipulated as needed. Importantly, they can also be queried - an important task for this project 
+        li Rules data structure: Python class instances stored in a list - Rules are stored in an instance of a rule class and each of these instances are stored in a list allowing them to be indexed. 
+        li Machine Learning: Sci-kit learn (sklearn) - Sklearn is a popular and easy to use machine learning Python library that offers implementations for many different machine learning models.
+
+    br
+    h3 Results 
+    p At the end of the project, the system was complete and was proof that RDR can be used for Explainable AI. The system created to prove this uniquely combines machine learning “black boxes” alongside a human based RDR system to form a singular system used to create an interpretable model to explain a black box classifier. Using a human in the loop distinguishes this method of explainable AI from other algorithmic based methods as humans can understand human made models, whilst humans can not always understand models created by algorithms and AI.
+    p A full walkthrough of using the system is available in the GitHub repository's readme as well as in the final thesis report. Additionally, the the final thesis report contains the full results of using the system with different datasets is shown.
+
+

@@ -1,0 +1,105 @@
+extends layout
+
+block content
+
+    h1(class="title") #{title}
+    //-H5 Project type: personal
+    //- important: this path is how you get images. Put images in public/images folder
+    p 22 March 2020
+    br
+    <p><u>One time pad</u></p>
+
+    <p>A one time pad (OTP) is an unbreakable encryption when used correctly. The way it works is that for each character of plaintext, a key (random string) is added to it to create ciphertext. For example, if we want to encrypt the word "hello", we need a key at least 5 characters long. For this example, the key is &quot;asdfg&quot;. To encrypt the word, we add the key to plaintext, we first convert letters to their position in the alphabet: A&nbsp;becomes 1, B&nbsp;becomes 2....Z&nbsp;becomes 26.</p>
+
+    <p>&quot;Hello&quot; becomes: 8, 5, 12, 12, 15. The key becomes: 1, 19, 4, 6, 7.</p>
+
+    <p>We now add each number of the plaintext with its corresponding number in ciphertext, mod(26) (in order to wrap around if we go over 26 - the limit of letters in the alphabet).&nbsp;</p>
+
+    <p>(8+1), (5+19), (12+4), (12+6), (15+7) =&gt; 9, 24, 16, 18, 22. Converting these numbers back to letters, we get: i, x, p, r, v. Therefore our OTP encryption of &quot;hello&quot; is &quot;ixprv&quot;.</p>
+
+    <p>The reciever of this message will use the same pad that encrpyted the message and subtract the same key from the ciphertext to give the plaintext. The sender and reciver must ensure that: they know which pad the other is using and that the pad is unknown by anyone else.</p>
+
+    <p>To be impossible to break:</p>
+
+    <ol>
+        <li>The key must be truely random</li>
+        <li>The key must be at least as long as the plaintext</li>
+        <li>The key must never be reused</li>
+        <li>The key must be kept completely secret</li>
+    </ol>
+
+    <p>If any of these conditions is broken, the encryption (and key) is compromised and can be broken.&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p><u>Symmetric Key encryption</u></p>
+
+    <p>Symetric key encryption can use 2 types of encryption, stream ciphers or block ciphers</p>
+
+    <p><u>Stream Ciphers</u></p>
+
+    <p>Stream ciphers encrypt characters of plaintext one character at a time. Some examples are:</p>
+
+    <ul>
+        <li>Caesar cipher - is a simple stream cipher whereby every character of plaintext is replaced with a different character that is a set number of places away from it. For example a left&nbsp;shift of 3 is shown in the diagram below. From the diagram, E is replaced with B, F is replaced by C etc. It is like a OTP if the pad was a single character. Ceasar cipher is a trivial form of encryption and can be broken by inspection or by shifting the ciphertext until a proper message is discovered.</li>
+    </ul>
+
+    <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Caesar_cipher_left_shift_of_3.svg/220px-Caesar_cipher_left_shift_of_3.svg.png" class="center smallpic"/></p>
+
+    <ul>
+        <li>ROT13 - is a form of ceasar cipher where each character is shifted 13 places (halfway through the alphabet).</li>
+        <li>Vigen&egrave;re cipher - uses multiple caesar ciphers and a keyword to encrypt text</li>
+        <li>One time pad - as discussed above</li>
+    </ul>
+
+    <p>&nbsp;</p>
+
+    <p><u>Block ciphers</u></p>
+
+    pBlock ciphers encrypt a block of plaintext at a time as opposed to a one at a time. DES and AES are both block ciphers and are discussed further in a 
+        a(href="/blog/modern_encryption" target="_blank" rel="noopener noreferrer") different blog
+        span . The mode of a block cipher is the process that blocks go through for encryption. Here are the main methods:
+
+    br
+    br
+    <p><u>Electronic Code Block (ECB)</u></p>
+
+    <p>ECB is the simplest way to encrypt using block ciphers - each block is encrypted separately one at a time as shown in this diagram:</p>
+
+    figure
+        img(src="/images/ecb.png" alt="aesarray" class="center hpic")
+        //- figcaption(style="text-align: center") Figure 2 - AES uses a 4x4 array
+
+    <p>The problem with ECB is that there is no diffusion - that is when there is a single change to input, at least half the bits of the ciphertext should be changed. However with ECB, this is not the case, and the same input will equal the same&nbsp;output. For example, here is an image encrypted with AES but using ECB mode:</p>
+
+    div(style="display:flex")
+        <p><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg" /><img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg" /></p>
+
+    <p>We can clearly see that the &quot;encrypted&quot; version is very similar to the &quot;plaintext&quot; penguin. Large areas share the same colour such as the white penguin body. As discussed above, same input will mean same output, so the white body part in the&nbsp;encrypted penguin all looks the same, preserving the overall structure of the penguin, failing at its job of encryption.</p>
+
+    <p><u>Cipher Block Chaining (CBC)</u></p>
+
+    <p>Cipher block chaining uses the resulting ciphertext from the previous block to encrypt the next block as shown in this diagram:</p>
+
+    figure
+        img(src="/images/cbc.PNG" alt="cbc" class="center hpic")
+        //- figcaption(style="text-align: center") Figure 2 - AES uses a 4x4 array
+
+    <p>Firstly, an initialisation vector is XOR&#39;ed with the plaintext then encrypted with the key. The resulting ciphertext is used as the initialisation vector in the next block and is XOR&#39;ed with that plaintext and the cycle continues. This method causes an avalanching effect when a single change is made to the plaintext. For example, if one change is made to the plaintext of the first block, then this will change the resulting ciphertext, which changes the result of the XOR in the&nbsp;next block and so on. This &quot;avalanching&quot; effect fixes most of the problems of ECB such as its now diffusion but it is slow to encrpyt as each block must be encrypted sequentially since encrpytion of a block relies of the ciphertext of the previous block.</p>
+
+    <p><u>Counter (CTR)</u></p>
+
+    <p>Counter mode uses a known nonce (random string) and a counter which counts up for each block which are encrypted by the key and then XOR&#39;ed with plaintext as shown in this diagram:</p>
+
+    figure
+        img(src="/images/counter.PNG" alt="counter" class="center hpic")
+        //- figcaption(style="text-align: center") Figure 2 - AES uses a 4x4 array
+
+    <p>CTR solves CBC&#39;s time problem as blocks can be encrypted in parallel. The counter means that the same input will not have the same output leading to CTR having good diffusion.</p>
+
+    <p>&nbsp;</p>
+
+    p Further reading
+    <p><a href="https://www.openlearning.com/u/shreysudhir-q5tsrk/blog/CryptoTerms4Dummies/" rel="nofollow">https://www.openlearning.com/u/shreysudhir-q5tsrk/blog/CryptoTerms4Dummies/</a></p>
+
+    <p><a href="https://en.wikipedia.org/wiki/Confusion_and_diffusion" rel="nofollow">https://en.wikipedia.org/wiki/Confusion_and_diffusion</a></p>

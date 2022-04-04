@@ -18,4 +18,14 @@ router.get('/my_website', function (req, res) {
   res.render('my_website', { name: "projects", title: 'my_website' });
 })
 
+// rdr
+router.get('/rdrforexplainableai', function (req, res) {
+  res.render('rdr', { name: "projects", title: 'Ripple Down Rules for Explainable AI' });
+})
+
+// heartbeat
+router.get('/heartbeatbasedauthentication', function (req, res) {
+  res.render('heartbeat', { name: "projects", title: 'Heartbeat Based Authentication in Wearable Devices' });
+})
+
 module.exports = router;

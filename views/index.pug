@@ -1,12 +1,25 @@
 extends layout
 
+//- block append head
+//-   //- title= "my_website | " + title
+//-   title #{title}
+
 block content
 
   h1 Hi, I'm Nathan
   br
   h5 Welcome to #{title}. Here you can find stuff about me.
   br
-  h5 I am currently studying Software Engineering at UNSW. I am particularly interested in Security and AI. 
+  h5 I am currently studying Software Engineering at UNSW. I am particularly interested in Security and AI/ML. 
+  br
+  h5 Check out my undergraduate thesis on #[a(href="/projects/rdrforexplainableai") Using Ripple Down Rules for Explainable AI]
+  br
+  h5 Visit my #[a(href="https://github.com/nathand99") GitHub profile] to see what I have 
+    b worked 
+    span on and what I am 
+    b working 
+    span on
+
   br
   //-h5 I also play the video game League of Legends and my main champion is Yuumi
   br
@@ -17,14 +30,16 @@ block content
       placeholder for my projects
     li 
       a(href="/blog") Blogs 
-      placeholder for some blogs that I write
+      placeholder for some blogs or things that I write
     li 
       a(href="/contact") Contact
       placeholder  to get in touch
   br
   br
-  p This is my_website v1.0. For the features to be included for version 2.0 see the #[a(href="/projects/my_website") project page]
-  //-h5 gg
+  
+  h5 The changelog for v1.1 can be found in the readme of this project's #[a(href="https://github.com/nathand99/my_website/") repo].
+  br
+  p This is my_website v1.1. For the features to be included for version 2.0 see the #[a(href="/projects/my_website") project page]. 
 
 
   //- h1 Dynamic content

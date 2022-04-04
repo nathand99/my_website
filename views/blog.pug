@@ -1,13 +1,31 @@
 extends layout
 
+//- block append head
+//-   //- title= "my_website | " + title
+//-   title my_website | Blog
+
 block content
 
-    //-h1 #{title}
-    H1 Welcome to my #{title}
-    
-    //-div(class="container projects")
-    //-a(href="/blog/html_cheatsheet" disabled='disabled')
+  h1 #{title}
+  h4 Welcome to my #{title}
+  
+  //-div(class="container projects")
+  //-a(href="/blog/html_cheatsheet" disabled='disabled')
+    div(class="project")
+      h3 HTML Cheatsheet
+      p A cheatsheet about all tags available in HTML5! 
+
+  div(class="container projects")
+    a(href="/blog/sqli")
       div(class="project")
-        h3 HTML Cheatsheet
-        p A cheatsheet about all tags available in HTML5! 
+        h3 SQLI - #1 on OWASP's Top 10 Web Application Vulnerabilities
+        p SQLI is #1 in the top ten critical security risks to web applications according to OWASP. So what is SQLI and why is it so dangerous?
+    a(href="/blog/further_encryption")
+      div(class="project")
+        h3 Further Encryption - OTP and Symmetric Key encryption
+        p Explaining one time pads and stream and block ciphers
+    a(href="/blog/modern_encryption")
+      div(class="project")
+        h3 Modern Encryption - DES & AES
+        p Explaining DES and AES
 

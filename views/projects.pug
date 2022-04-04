@@ -1,5 +1,9 @@
 extends layout
 
+//- block append head
+//-   //- title= "my_website | " + title
+//-   title my_website | Projects
+
 block content
 
   h1 #{title}
@@ -9,7 +13,16 @@ block content
     a(href="/projects/my_website")
       div(class="project")
         h3 my_website 
-        p my_website is my personal website. It is created using Express.js, a Node.js web application framework. Each view is written in Pug using CSS. Pug is a template engine used to generate html 
+        p my_website is my personal website - the website you are looking at right now
+        //- . It is created using Express.js, a Node.js web application framework. Each view is written in Pug using CSS. Pug is a template engine used to generate html 
+    a(href="/projects/rdrforexplainableai")
+      div(class="project")
+        h3 Ripple Down Rules for Explainable AI
+        p My undergraduate thesis
+    a(href="/projects/heartbeatbasedauthentication")
+      div(class="project")
+        h3 Heartbeat based authentication
+        p An IOT project
     //-a(href="/" disabled="disabled")
       div(class="project")
         h5 my_website 

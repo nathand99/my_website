@@ -1,0 +1,94 @@
+extends layout
+
+block content
+
+    h1(class="title") #{title}
+    //-H5 Project type: personal
+    //- important: this path is how you get images. Put images in public/images folder
+    p 9 April 2020
+    br
+    p SQLI is #1 of the top ten critical security risks to web applications accoring to 
+        a(href="https://owasp.org/www-project-top-ten/2017/Top_10" target="_blank" rel="noopener noreferrer") OWASP Top 10 - 2017 - The Ten Most Critical Web Application Security Risks
+        span . Open Web Application Security Project® 
+        a(href="https://owasp.org/OWASP" target="_blank" rel="noopener noreferrer") (OWASP) 
+        span  is a nonprofit foundation that works to improve the security of software.
+
+    <p>What is SQL?</p>
+
+    <p>SQL stands for Structure query language. It is a programming language that is used to manage data inside databases. When inputting your information such as login, username and password to a website, that website will use the inputs you gave inside an SQL query to the database. This query asks the database to verify your login details given in the query with the details in the database. It asks the database: "Does a person with this particular username and password exist in the database?". If the answer to this query is yes - your username and password match up - and you will be successfully authenticated and then allowed into the website.&nbsp;</p>
+
+    <p>Sounds good so far, whats the problem?</p>
+
+    p The problem is SQL
+        b I
+        span , with the 
+        b I 
+        span standing for injection. Remember that you as the user, give inputs to the website that are used in the query to the database. If we &quot;inject&quot; some 
+        b SQL code 
+        span inside our inputs then the database will execute the SQL query with our potentially malicious SQL code inside the normal SQL query to potentially change the behavour of the query. The problem is that the database cannot tell the different between data and code - a major issue!
+
+    <p>Lets see an example, this is one type of SQL injection called a First order injection.</p>
+
+    <p>Here is a typical login screen:</p>
+
+    <p><img alt="" class="hpic center" data-citation-link="https://i.pinimg.com/originals/75/66/62/756662ce30f840fa0ea346fedaf019c1.jpg" data-citation-text="" data-long-description="" src="/images/login.jpg" /></p>
+
+    <p>A genuine SQL query for when the username you enter is &quot;admin&quot; and password is &quot;x&quot; could be:&nbsp;</p>
+
+    <div>
+        <div>
+            <p><b>SELECT * FROM users WHERE username=<span style="text-decoration:underline;">&lsquo;admin&rsquo;</span> AND password=<span style="text-decoration:underline;">&lsquo;x&rsquo;</span> LIMIT 1;</b></p>
+        </div>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <p>The user inputs (things you can modify) are underlined. Now what does this SQL command actually mean?</p>
+
+    <div>&nbsp;</div>
+
+    <p>This command means: select all fields from the users table (the table in the database where all the users are stored) where the username is the username you provided and password is the password you provided. If these match, then your account will be loaded. If the inputs you entered do not match any records in the database, there will be no results and you will be denied access. If the username matches an entry in the users table but the password does not match, then the query will fail due to the AND operator.</p>
+
+    <div>&nbsp;</div>
+
+    <p>Now lets attack this my providing inputs that modify the SQL query.</p>
+
+    <p>We can keep &quot;admin&quot; as our username and this time we will write: <span style="text-decoration:underline;">&#39;x&#39; OR &#39;1&#39;=&#39;1</span>&nbsp;as our password.</p>
+
+    <div>&nbsp;</div>
+
+    <p>But why would we put this as our password?</p>
+
+    <div>&nbsp;</div>
+
+    <p>Plugging these values into our SQL query from before, the query will read:&nbsp;</p>
+    br
+    <p>
+    b SELECT * FROM users WHERE username=<span style="text-decoration:underline;">&lsquo;admin&rsquo;</span> AND password=<span style="text-decoration:underline;">&lsquo;x&#39; OR &#39;1&#39;=&#39;1&#39;</span>&nbsp;LIMIT 1;
+    </p>
+    br
+
+    <p>As you can see, our password is not simply a data input, we are modifying the SQL query. Now the query means: select all fields from the user table where username = 'admin' and the password = 'x' OR '1'='1'.</p>
+
+    <div>&nbsp;</div>
+
+    <p>So the database will find the user &quot;admin&quot; and lets assume that there is a user with username admin. Now when checking if our password is right or not, it reads 
+        b 'x' OR '1=1'
+        span . It doesn&#39;t matter if x is the password or not, but '1'='1' is always a true statement. That means this statement which checks if the password is correct will always equate to True. Therefore we have gained access to the admin account without even knowing the password!</p>
+
+    <div>&nbsp;</div>
+
+    <div>&nbsp;</div>
+
+    <p>Looks pretty easy doesn&#39;t it? So how do we prevent it?</p>
+
+    <p>
+    <ul>
+        <li>The best way to prevent against SQLI is to control the inputs given to your database. An API (application programmers interface) can be used to safely take users input</li>
+        <li>&nbsp;Parameterised statements&nbsp;make sure that the parameters (i.e. inputs) passed into SQL statements are treated in a safe manner.</li>
+        <li>Use LIMIT and other SQL controls within queries to prevent mass disclosure of records in case of SQL injection</li>
+        <li>Object Relational Mapping (ORM)&nbsp;frameworks mean developers will rarely have to write SQL statements in their code &ndash; and they use parameterised statements. Without SQL, a SQLI attack cannot be performed</li>
+    </ul>
+    </p>
+    br
+    a(href="https://i.pinimg.com/originals/75/66/62/756662ce30f840fa0ea346fedaf019c1.jpg") Image source

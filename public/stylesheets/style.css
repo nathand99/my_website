@@ -11,8 +11,22 @@ body {
   background-repeat: repeat;
 
   
+  /* line-height: 170%; */
 }
 
+.title {
+  font-weight: bold;
+}
+
+p {
+  font-size:1.1em;
+  letter-spacing: 0.25px;
+}
+
+li {
+  font-size:1.1em;
+  letter-spacing: 0.25px;
+}
 pattern {
   background-color: #000000;
   opacity: 1;
@@ -117,4 +131,32 @@ li {
   margin-right: auto;
   height: 90%;
   width: 90%;
+}
+
+iframe {
+  display:block;
+  margin: 0 auto;
+  /* align-self:center; */
+}
+
+.hpic {
+  width:60%;
+  height:60%;
+}
+
+.smallpic {
+  width:20%;
+  height:20%;
+}
+
+.compare {
+  width:40%;
+  height:300px;
+  display:inline;
+  margin: 0 30px;
+}
+
+.title {
+  margin-top:30px;
+  margin-bottom: 30px;
 }
